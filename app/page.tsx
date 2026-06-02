@@ -1248,6 +1248,447 @@ const scrumBasics: Course = {
   ],
 };
 
+const jiraCloud: Course = {
+  id: "jira-cloud",
+  title: "Jira Cloud: Projects, Boards, and Issues",
+  subtitle: "LinkedIn Learning — Agile Project Management with Jira Cloud: 1 (4.7 ★, 6,972 reviews)",
+  chapters: [
+    {
+      id: "jira-overview",
+      number: "Overview",
+      title: "Course Overview",
+      summary: "Introduces the course structure and what you will be able to do with Jira Cloud by the end.",
+      content: [
+        {
+          type: "paragraph",
+          text: "This course covers Jira Cloud — Atlassian's cloud-hosted project management tool — specifically how to use it to manage agile projects. You will learn how to create projects, configure boards, manage issues, and apply the Kanban method.",
+        },
+        {
+          type: "subheading",
+          text: "Two Project Types in Jira Cloud",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Project Type", "Best for", "Key characteristic"],
+            rows: [
+              ["Company-managed (Classic)", "Organisations needing shared configuration across projects", "Admins control workflows, schemes, and fields centrally"],
+              ["Team-managed (Next-gen)", "Teams wanting fast setup with minimal admin overhead", "Each team configures their own project independently"],
+            ],
+            note: "Both types support Scrum and Kanban boards. The labs in this course cover both so you can compare them directly.",
+          },
+        },
+        {
+          type: "subheading",
+          text: "Core Jira Concepts",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Concept", "What it is"],
+            rows: [
+              ["Project", "A container for all the work related to a product or team"],
+              ["Issue", "Any unit of work — story, task, bug, epic, sub-task"],
+              ["Board", "The visual interface for managing and tracking issues (Scrum or Kanban)"],
+              ["Backlog", "The ordered list of all work not yet started in a sprint"],
+              ["Sprint", "A fixed-length iteration (used in Scrum boards)"],
+              ["Epic", "A large body of work that groups multiple stories or tasks"],
+            ],
+          },
+        },
+      ],
+    },
+    {
+      id: "jira-ch1",
+      number: "Chapter 1",
+      title: "Agile and Jira",
+      summary:
+        "Explains how Jira supports agile workflows, the difference between company-managed and team-managed projects, and how to navigate the Jira interface.",
+      content: [
+        {
+          type: "subheading",
+          text: "What is Jira?",
+        },
+        {
+          type: "paragraph",
+          text: "Jira is a project management and issue tracking tool built by Atlassian. Originally designed for bug tracking, it has evolved into the most widely used agile project management platform, supporting both Scrum and Kanban workflows out of the box.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Used by teams of all sizes — from 5-person startups to Fortune 500 engineering organisations.",
+            "Jira Cloud is the SaaS version: no installation, always up to date, accessible from any browser.",
+            "Deep integration with other Atlassian tools: Confluence (documentation), Bitbucket (code), and the broader Atlassian ecosystem.",
+            "Highly configurable: workflows, fields, permissions, and screens can all be customised.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "How Jira Supports Agile",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Agile concept", "Jira implementation"],
+            rows: [
+              ["Product Backlog", "Project backlog — ordered list of issues prioritised by the Product Owner"],
+              ["Sprint", "Jira Sprint — time-boxed iteration with a start date, end date, and sprint goal"],
+              ["Sprint Board", "Scrum board — columns for each workflow state (To Do / In Progress / Done)"],
+              ["Kanban Board", "Kanban board — continuous flow with WIP limits per column"],
+              ["User Story", "Story issue type — with summary, description, acceptance criteria, and story points"],
+              ["Daily Standup", "Board view — team reviews issues in progress and identifies blockers"],
+              ["Burndown Chart", "Built-in sprint report — plots remaining story points vs remaining days"],
+              ["Retrospective", "No native feature — teams use Confluence or third-party add-ons"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Company-Managed vs Team-Managed Projects",
+        },
+        {
+          type: "paragraph",
+          text: "Jira Cloud offers two project templates with very different governance models. Understanding which to use is one of the first decisions a team makes.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Feature", "Company-Managed", "Team-Managed"],
+            rows: [
+              ["Setup complexity", "Higher — requires Jira admin involvement", "Low — any team member can create and configure"],
+              ["Workflow customisation", "Full control via shared workflow schemes", "Simple preset workflows; limited customisation"],
+              ["Fields and screens", "Configurable per issue type via admin screens", "Simplified, predefined fields"],
+              ["Permissions", "Granular permission schemes set by admins", "Per-project settings, simpler model"],
+              ["Shared configuration", "Workflows and fields reused across many projects", "Configuration is per-project only"],
+              ["Best for", "Large orgs with consistent standards across teams", "Small teams or rapid prototyping"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Navigating Jira Cloud",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Left sidebar: access Projects, Boards, Backlogs, Reports, and Project Settings.",
+            "Top navigation: search all issues, notifications, and your profile/settings.",
+            "Project home: overview of recent activity, assigned issues, and quick links to board and backlog.",
+            "Issue detail view: opens when you click any issue — shows all fields, comments, history, and attachments.",
+            "Keyboard shortcuts: press '?' anywhere in Jira to see the full shortcut list.",
+          ],
+        },
+      ],
+      keyPoints: [
+        { label: "Jira purpose", value: "Agile project management and issue tracking — supports Scrum and Kanban natively" },
+        { label: "Two project types", value: "Company-managed (admin-controlled, shared config) vs Team-managed (team-controlled, simple)" },
+        { label: "Agile fit", value: "Jira maps directly to agile concepts: backlogs, sprints, boards, story points, burndowns" },
+        { label: "Key decision", value: "Choose project type based on team size, admin capacity, and need for cross-project consistency" },
+      ],
+    },
+    {
+      id: "jira-ch2",
+      number: "Chapter 2",
+      title: "Project Boards",
+      summary:
+        "Covers how to use, navigate, and configure Scrum and Kanban boards in both company-managed and team-managed Jira projects.",
+      content: [
+        {
+          type: "subheading",
+          text: "What is a Project Board?",
+        },
+        {
+          type: "paragraph",
+          text: "A board is the primary visual interface for managing work in Jira. It displays issues as cards arranged in columns that represent workflow stages. Moving a card across the board updates the issue's status automatically.",
+        },
+        {
+          type: "subheading",
+          text: "Scrum Board",
+        },
+        {
+          type: "paragraph",
+          text: "A Scrum board shows the work within an active sprint. Issues are pulled from the backlog into a sprint during Sprint Planning, and the board tracks progress through the sprint.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Columns represent statuses: typically To Do → In Progress → Done (fully customisable in company-managed projects).",
+            "Backlog view: separate from the board, shows all issues not in an active sprint. This is where you groom and plan.",
+            "Sprint creation: in the backlog, create a sprint, drag issues in, set the sprint goal, start date, and end date, then click 'Start Sprint'.",
+            "Sprint completion: at the end of a sprint, click 'Complete Sprint' — incomplete issues are moved to the backlog or the next sprint.",
+            "Swimlanes: group board rows by assignee, epic, priority, or custom query to improve visibility.",
+            "Quick filters: one-click filters to show only your issues, unassigned issues, or issues matching a specific label.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Kanban Board",
+        },
+        {
+          type: "paragraph",
+          text: "A Kanban board provides a continuous flow view without fixed sprint iterations. Issues move from left to right as work progresses.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "No sprints — work flows continuously rather than in fixed-length iterations.",
+            "WIP limits: set a maximum number of issues allowed in each column to prevent overloading the team.",
+            "Backlog: Kanban boards can optionally show a backlog column that feeds into the leftmost active column.",
+            "Column colours change when WIP limits are exceeded — a visual signal to stop starting and start finishing.",
+            "Ideal for support, maintenance, and operations teams with unpredictable, continuous incoming work.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Board Configuration (Company-Managed)",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Setting", "What you configure"],
+            rows: [
+              ["Columns", "Map workflow statuses to board columns; add/rename/reorder columns"],
+              ["WIP limits", "Set minimum and maximum issues per column (Kanban boards)"],
+              ["Swimlanes", "Choose grouping: by epic, assignee, priority, or a JQL query"],
+              ["Quick filters", "Create preset filters (e.g. 'My Issues', 'Bugs Only') visible above the board"],
+              ["Card layout", "Choose which fields appear on the issue card (e.g. show assignee avatar, priority flag)"],
+              ["Working days", "Set non-working days to make burndown calculations accurate"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Board Configuration (Team-Managed)",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Simpler configuration: add/remove columns directly from the board by clicking the '+' button.",
+            "Column names double as status names — renaming a column renames the status.",
+            "No swimlanes or advanced card layout options.",
+            "WIP limits available on Kanban boards.",
+          ],
+        },
+        {
+          type: "note",
+          text: "The board is a view — it doesn't store data independently. Changing an issue's column simply transitions its status in the underlying workflow. This means a single issue can appear on multiple boards if they share the same project.",
+        },
+      ],
+      keyPoints: [
+        { label: "Scrum board", value: "Sprint-based view — pull issues from backlog, track through sprint, complete at sprint end" },
+        { label: "Kanban board", value: "Continuous flow view — no sprints, WIP limits prevent bottlenecks" },
+        { label: "Board vs backlog", value: "Board shows the active sprint; backlog shows all future work — both are essential" },
+        { label: "Column = status", value: "Moving a card across the board updates the issue's workflow status" },
+      ],
+    },
+    {
+      id: "jira-ch3",
+      number: "Chapter 3",
+      title: "Enrich Issues",
+      summary:
+        "Explores the full range of issue fields and types available in Jira, and how to use them to add enough context for the team to do their work without ambiguity.",
+      content: [
+        {
+          type: "subheading",
+          text: "Issue Types",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Issue Type", "Purpose", "Typical size"],
+            rows: [
+              ["Epic", "Large body of work spanning multiple sprints; groups related stories and tasks", "Weeks to months"],
+              ["Story", "A user-facing feature or requirement; the main unit of sprint work", "1–2 sprint days"],
+              ["Task", "Technical work not directly tied to a user story (e.g. infrastructure, research)", "Hours to days"],
+              ["Sub-task", "A specific piece of a parent story or task; assigned to one person", "Hours"],
+              ["Bug", "A defect in existing functionality; includes steps to reproduce and expected vs actual behaviour", "Varies"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Key Issue Fields",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Summary: the one-line title of the issue — write it as an action or outcome, not a vague noun.",
+            "Description: detailed context, acceptance criteria, screenshots, or links. Use Jira's rich text editor.",
+            "Assignee: the team member responsible for the issue. Only one assignee per issue — use sub-tasks for shared work.",
+            "Reporter: the person who created or raised the issue. Auto-populated but can be changed.",
+            "Priority: Highest / High / Medium / Low / Lowest. Used for filtering and sorting the backlog.",
+            "Labels: free-text tags that apply across projects. Useful for cross-cutting themes (e.g. 'accessibility', 'tech-debt').",
+            "Components: sub-sections of the project (e.g. 'Frontend', 'API', 'Database'). Set by a Jira admin in company-managed projects.",
+            "Story Point Estimate: the team's relative complexity estimate. Drives velocity and release forecasting.",
+            "Due Date: a target date. Use sparingly in agile — sprints are your time boundary, not individual due dates.",
+            "Linked Issues: relationships between issues — 'blocks', 'is blocked by', 'relates to', 'duplicates', 'clones'.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Epics in Jira",
+        },
+        {
+          type: "paragraph",
+          text: "Epics are the primary way to organise related work across multiple sprints. They appear in the backlog as a coloured bar and on a separate Epic panel.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Create an epic from the backlog: click 'Create Epic' in the Epics panel on the left side of the backlog.",
+            "Assign stories to an epic: drag stories onto the epic in the backlog, or set the 'Epic Link' field on the issue.",
+            "Epic progress bar: shows how many child issues are Done vs To Do vs In Progress at a glance.",
+            "Roadmap view (company-managed): see all epics on a timeline and drag to adjust dates.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Enriching Issues Effectively",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Field", "Company-Managed", "Team-Managed"],
+            rows: [
+              ["Components", "Available — admin configures component list", "Not available"],
+              ["Story Points", "'Story Points' field on Stories/Bugs", "'Story point estimate' field on all issue types"],
+              ["Custom fields", "Admin can add any custom field type", "Limited to predefined fields; fewer options"],
+              ["Workflows / Statuses", "Fully customisable status sets per issue type", "Simple preset: To Do / In Progress / Done"],
+              ["Screens", "Admin controls which fields appear on create/edit screens", "All fields always visible; no screen configuration"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Writing Good Issue Summaries",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Be specific: 'User cannot reset password from mobile Safari' beats 'Login bug'.",
+            "For stories, use the user story format or an outcome-focused title: 'Add filters to the product search results page'.",
+            "For bugs, include the trigger: 'Checkout total shows $0 when discount code is applied'.",
+            "Avoid abbreviations or internal jargon that new team members won't understand.",
+          ],
+        },
+        {
+          type: "note",
+          text: "The purpose of enriching issues is to give any team member — including someone picking up the issue for the first time — enough context to start work without needing to ask clarifying questions. Every missing field is a potential blocker.",
+        },
+      ],
+      keyPoints: [
+        { label: "Issue hierarchy", value: "Epic → Story/Task → Sub-task (three levels of nesting)" },
+        { label: "Components vs labels", value: "Components = project sub-sections (admin-defined); Labels = free-text tags (anyone can add)" },
+        { label: "Story points", value: "Relative complexity estimate — drives velocity and release forecasting" },
+        { label: "Issue links", value: "Explicitly model dependencies: 'blocks', 'is blocked by', 'relates to'" },
+        { label: "Enrichment goal", value: "Any team member should be able to start work from the issue alone — no clarifying questions needed" },
+      ],
+    },
+    {
+      id: "jira-ch4",
+      number: "Chapter 4",
+      title: "Kanban Method",
+      summary:
+        "Deep-dives into using the Kanban method in Jira Cloud — configuring WIP limits, managing flow, and using Kanban metrics to improve throughput.",
+      content: [
+        {
+          type: "subheading",
+          text: "The Kanban Method in Jira",
+        },
+        {
+          type: "paragraph",
+          text: "The Kanban method is a pull-based system where work items flow continuously from left to right on the board as capacity becomes available. Unlike Scrum, there are no sprints, no sprint planning, and no sprint reviews — work just flows.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Kanban Principle", "How Jira implements it"],
+            rows: [
+              ["Visualise work", "Kanban board: every issue is a card; every workflow stage is a column"],
+              ["Limit WIP", "WIP limits per column: Jira highlights columns in red when the limit is exceeded"],
+              ["Manage flow", "Cumulative Flow Diagram: shows how work accumulates and moves through stages over time"],
+              ["Make policies explicit", "Column definitions and WIP limit rules are visible to all team members on the board"],
+              ["Improve collaboratively", "Control Chart: shows cycle time for each issue; identify outliers and systemic delays"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Configuring a Kanban Board in Jira",
+        },
+        {
+          type: "numbered",
+          items: [
+            "Create a new project → choose 'Kanban' as the board type.",
+            "Define your columns to match your actual workflow — add intermediate stages like 'In Review' or 'Ready for QA' as needed.",
+            "Set WIP limits on each column (especially In Progress). Start with team size as your In Progress limit.",
+            "Optionally enable the backlog: keeps unstarted issues off the board until pulled in, reducing noise.",
+            "Add your team as project members with appropriate roles.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Kanban Metrics in Jira",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Metric", "What it measures", "How to use it"],
+            rows: [
+              ["Cycle Time", "Time from when work starts (In Progress) to when it is Done", "Identify bottlenecks; aim for shorter, more consistent cycle times"],
+              ["Lead Time", "Time from when the issue was created to when it is Done", "Reflects the customer's wait time; total system response time"],
+              ["Throughput", "Number of issues completed per week/sprint period", "Forecast future delivery using historical throughput rather than estimation"],
+              ["Cumulative Flow Diagram (CFD)", "Area chart showing how many issues are in each stage over time", "Bands widening = bottleneck forming; flat bands = flow blocked; smooth, consistent bands = healthy flow"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Kanban vs Scrum Board in Jira",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Dimension", "Scrum Board", "Kanban Board"],
+            rows: [
+              ["Cadence", "Fixed sprints (1–4 weeks)", "Continuous — no iterations"],
+              ["Planning", "Sprint Planning every sprint", "Pull items in as capacity allows"],
+              ["WIP limits", "Sprint capacity limits work implicitly", "Explicit per-column WIP limits"],
+              ["Metrics", "Burndown chart, velocity", "Cycle time, lead time, CFD, throughput"],
+              ["Best for", "Building new products with regular releases", "Support queues, maintenance, operations"],
+              ["Backlog", "Separate backlog view; issues pulled into sprints", "Backlog is optional; issues pulled onto board"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "When to Use Kanban in Jira",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Customer support or IT service teams: incoming tickets are unpredictable; Kanban handles variability better than sprints.",
+            "Maintenance and operations: ongoing work without a clear product backlog or release cycle.",
+            "Teams transitioning from no process: Kanban is simpler to adopt as a first step before adding Scrum structure.",
+            "Mature Scrum teams: some teams use a Kanban board for unplanned work that arrives mid-sprint, alongside their Scrum board.",
+          ],
+        },
+        {
+          type: "note",
+          text: "WIP limits are the single most powerful lever in Kanban. If your board has no WIP limits, you have visualised your work but have not implemented Kanban — you've just made a task list more colourful.",
+        },
+      ],
+      keyPoints: [
+        { label: "Kanban in Jira", value: "Continuous flow board with WIP limits — no sprints, no sprint planning" },
+        { label: "Most important lever", value: "WIP limits — enforce focus and prevent multitasking" },
+        { label: "Key metric", value: "Cycle time: time from In Progress to Done — shorter and more consistent = better" },
+        { label: "CFD insight", value: "Bands widening on the CFD = a bottleneck is forming upstream of that stage" },
+        { label: "Kanban vs Scrum", value: "Kanban = continuous flow for unpredictable work; Scrum = cadence-based for product development" },
+      ],
+    },
+  ],
+};
+
 /* ─────────────────── COMPONENTS ─────────────────── */
 
 function ChevronDown({ className }: { className?: string }) {
@@ -1432,6 +1873,7 @@ function CourseTab({ course }: { course: Course }) {
 const TABS = [
   { id: "agile-fundamentals", label: "Agile Fundamentals", course: agileFundamentals },
   { id: "scrum-basics", label: "Scrum: The Basics", course: scrumBasics },
+  { id: "jira-cloud", label: "Jira Cloud", course: jiraCloud },
 ];
 
 export default function Home() {
