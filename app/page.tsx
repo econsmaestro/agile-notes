@@ -16,10 +16,11 @@ interface TableData {
 }
 
 interface ChapterContent {
-  type: "paragraph" | "bullets" | "numbered" | "table" | "note" | "subheading";
+  type: "paragraph" | "bullets" | "numbered" | "table" | "note" | "subheading" | "code" | "ui-hint";
   text?: string;
   items?: string[];
   table?: TableData;
+  code?: { label?: string; lines: string[] };
 }
 
 interface Chapter {
@@ -1689,6 +1690,495 @@ const jiraCloud: Course = {
   ],
 };
 
+const jiraSearch: Course = {
+  id: "jira-search",
+  title: "Jira Cloud: Search, JQL & Agile Principles",
+  subtitle: "LinkedIn Learning — Agile Project Management with Jira Cloud: 2 (4.7 ★)",
+  chapters: [
+    {
+      id: "js-ch1",
+      number: "Chapter 1",
+      title: "Lean and Agile Principles",
+      summary: "Covers the Lean principles that underpin Agile, how they relate to each other, and how both are expressed in Jira workflows.",
+      content: [
+        {
+          type: "subheading",
+          text: "What is Lean?",
+        },
+        {
+          type: "paragraph",
+          text: "Lean originated at Toyota in the 1940s as the Toyota Production System — a manufacturing philosophy focused on eliminating waste and maximising value flow to the customer. Agile software development borrows heavily from Lean thinking.",
+        },
+        {
+          type: "subheading",
+          text: "The 7 Lean Principles",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Principle", "What it means", "Agile / Jira expression"],
+            rows: [
+              ["Eliminate waste", "Remove anything that doesn't add value to the customer", "WIP limits, short sprints, no unnecessary documentation"],
+              ["Amplify learning", "Use feedback loops to learn fast and adjust", "Sprint reviews, retrospectives, inspect-and-adapt cycles"],
+              ["Decide as late as possible", "Delay irreversible decisions until you have the most information", "Iterative planning; don't commit the whole backlog upfront"],
+              ["Deliver as fast as possible", "Speed reduces cost and increases learning", "Short sprints; continuous deployment; limit batch size"],
+              ["Empower the team", "Those doing the work make the decisions", "Self-organising teams; Scrum Master removes blockers, not assign tasks"],
+              ["Build integrity in", "Quality is built in, not inspected in at the end", "Definition of Done; TDD; code review; automated testing"],
+              ["See the whole", "Optimise the whole system, not individual parts", "End-to-end flow metrics; avoid local optimisation (one fast team, one blocked team)"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Lean vs Agile",
+        },
+        {
+          type: "note",
+          text: "Lean is the philosophy; Agile is its application to software. Lean asks 'what is waste?' — Agile answers with practices like sprints, standups, and retrospectives that systematically eliminate it.",
+        },
+        {
+          type: "subheading",
+          text: "Lean in Jira",
+        },
+        {
+          type: "bullets",
+          items: [
+            "WIP limits on Kanban boards enforce the Lean 'stop starting, start finishing' principle.",
+            "The Jira backlog is a pull system — teams pull work when they have capacity, not when it is pushed.",
+            "Cumulative Flow Diagrams reveal waste (queues) building up between workflow stages.",
+            "Velocity and cycle time metrics expose bottlenecks so the whole system can be optimised.",
+          ],
+        },
+      ],
+      keyPoints: [
+        { label: "Lean origin", value: "Toyota Production System (1940s) — eliminate waste, maximise flow" },
+        { label: "Key Lean insight", value: "Optimise the whole system, not individual steps" },
+        { label: "Lean → Agile link", value: "Lean is the philosophy; Agile practices are its software-specific implementation" },
+        { label: "Jira expression", value: "WIP limits, pull-based backlog, CFD, cycle time metrics" },
+      ],
+    },
+    {
+      id: "js-ch2",
+      number: "Chapter 2",
+      title: "Scrum Overview",
+      summary: "A focused recap of Scrum roles, events, and artefacts and how each is represented inside Jira Cloud.",
+      content: [
+        {
+          type: "subheading",
+          text: "Scrum in 60 Seconds",
+        },
+        {
+          type: "paragraph",
+          text: "Scrum is a lightweight framework for delivering value in short iterations called sprints. It defines three roles, five events, and three artefacts — everything else is left to the team.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Scrum element", "What it is", "Where it lives in Jira"],
+            rows: [
+              ["Product Backlog", "Ordered list of all desired product work", "Backlog view — left panel of a Scrum project"],
+              ["Sprint Backlog", "Items committed for the current sprint", "Active sprint on the board"],
+              ["Increment", "Working, done software at the end of each sprint", "Issues in 'Done' column meeting the DoD"],
+              ["Sprint Planning", "Team selects stories and defines sprint goal", "Create sprint → drag issues → Start Sprint"],
+              ["Daily Scrum", "15-min team sync on progress and blockers", "Board view — review cards in 'In Progress'"],
+              ["Sprint Review", "Demo to stakeholders; inspect increment", "Board + reports during sprint; then Complete Sprint"],
+              ["Retrospective", "Team improves process", "No native Jira feature — use Confluence or Miro"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Creating a Sprint in Jira",
+        },
+        {
+          type: "ui-hint",
+          text: "Backlog view → click 'Create sprint' button at the top of the backlog → drag issues into the sprint → click the '…' menu on the sprint → 'Start sprint' → set sprint name, goal, start date, end date → click Start.",
+        },
+        {
+          type: "subheading",
+          text: "Completing a Sprint",
+        },
+        {
+          type: "ui-hint",
+          text: "Board view → click 'Complete sprint' (top-right) → Jira shows a summary of Done vs incomplete issues → choose where to send incomplete issues (backlog or next sprint) → click Complete.",
+        },
+      ],
+      keyPoints: [
+        { label: "Scrum artefacts in Jira", value: "Product Backlog = backlog view; Sprint Backlog = active sprint; Increment = Done issues" },
+        { label: "Sprint lifecycle", value: "Create → populate → start → daily updates → review → complete" },
+        { label: "Jira gap", value: "Jira has no built-in retrospective tool — use Confluence, Miro, or EasyRetro" },
+      ],
+    },
+    {
+      id: "js-ch3",
+      number: "Chapter 3",
+      title: "Scrum Overview 2",
+      summary: "Hands-on walkthrough of Scrum project configuration for both company-managed and team-managed project types in Jira Cloud.",
+      content: [
+        {
+          type: "subheading",
+          text: "Company-Managed Scrum Project",
+        },
+        {
+          type: "ui-hint",
+          text: "Create project → select 'Scrum' template → choose 'Company-managed' → name your project → click Create. You'll see a Backlog and a Board tab in the left sidebar.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Board columns map to workflow statuses — configured by a Jira admin in Project Settings → Board.",
+            "Sprints are managed from the Backlog view — the sprint container appears above the backlog issues.",
+            "Epics appear in a panel on the left of the backlog and can be used to filter/group issues.",
+            "Reports available: Burndown Chart, Velocity Chart, Sprint Report, Epic Report, Version Report.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Team-Managed Scrum Project",
+        },
+        {
+          type: "ui-hint",
+          text: "Create project → select 'Scrum' template → choose 'Team-managed' → name your project → click Create. Setup is instant — no admin required.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Columns are created directly on the board — click '+' to add a column; the column name becomes the status name.",
+            "Sprints are created and managed from the Backlog tab.",
+            "Epics are managed from the Backlog — there is a separate 'Epics' panel.",
+            "Fewer reports than company-managed — Burndown and Velocity are available.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Side-by-Side Comparison",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Feature", "Company-Managed", "Team-Managed"],
+            rows: [
+              ["Who configures the board?", "Jira admin", "Any team member"],
+              ["Workflow customisation", "Full (statuses, transitions, conditions)", "Limited (column name = status)"],
+              ["Reports", "8+ report types", "Burndown + Velocity only"],
+              ["Components", "Yes (admin-defined)", "No"],
+              ["Custom fields", "Yes (admin adds)", "Limited preset fields only"],
+              ["Epic management", "Epic panel in backlog + Roadmap", "Epic panel in backlog"],
+            ],
+          },
+        },
+      ],
+      keyPoints: [
+        { label: "Company-managed", value: "More power, requires admin — use for established teams with standards" },
+        { label: "Team-managed", value: "Fast setup, less config — use for new teams or experiments" },
+        { label: "Board columns", value: "Company-managed: admin maps statuses; Team-managed: column name IS the status" },
+      ],
+    },
+    {
+      id: "js-ch4",
+      number: "Chapter 4",
+      title: "Quick Search and Basic Search",
+      summary: "How to use Jira's search bar for quick lookups and the basic search interface to build filtered views without writing JQL.",
+      content: [
+        {
+          type: "subheading",
+          text: "Quick Search",
+        },
+        {
+          type: "paragraph",
+          text: "The search bar at the top of every Jira page lets you find issues, projects, and boards instantly by typing keywords.",
+        },
+        {
+          type: "ui-hint",
+          text: "Click the Search bar (top-centre of Jira) or press '/' on your keyboard → type any keyword, issue key (e.g. SP-12), or project name → results appear instantly as you type.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Search by issue key: type the exact key (e.g. 'SP-5') to jump directly to that issue.",
+            "Search by keyword: searches summary, description, and comments.",
+            "Results are grouped by type: Issues, Projects, Boards, People.",
+            "Press Enter to go to the full search results page with all matches.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Basic Search (Issue Navigator)",
+        },
+        {
+          type: "paragraph",
+          text: "Basic search gives you dropdown filters to build queries without writing JQL. It is the best starting point before switching to JQL for complex queries.",
+        },
+        {
+          type: "ui-hint",
+          text: "Left sidebar → Filters → All work items → the search bar at the top shows filter dropdowns. If you see JQL text instead of dropdowns, click 'Switch to basic' on the right side of the search bar.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Filter dropdown", "What it filters"],
+            rows: [
+              ["Project", "One or more specific projects"],
+              ["Type", "Issue type: Story, Bug, Task, Epic, Sub-task"],
+              ["Status", "Workflow status: To Do, In Progress, Done, etc."],
+              ["Assignee", "The person the issue is assigned to (includes 'Me')"],
+              ["Reporter", "The person who created/reported the issue"],
+              ["Priority", "Highest, High, Medium, Low, Lowest"],
+              ["Label", "Any label applied to the issue"],
+              ["Sprint", "A specific sprint (open, closed, or future)"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Saving a Search as a Filter",
+        },
+        {
+          type: "ui-hint",
+          text: "Run your search → click 'Save filter' (top-right of search results) → give it a name → click Submit. The filter then appears in your left sidebar under Filters for quick access.",
+        },
+        {
+          type: "subheading",
+          text: "Switching Between Basic and JQL",
+        },
+        {
+          type: "ui-hint",
+          text: "In the search bar area, look for the toggle on the right: 'Switch to JQL' (from basic view) or 'Switch to basic' (from JQL view). Jira converts your basic filters into JQL automatically when you switch — a great way to learn JQL syntax.",
+        },
+      ],
+      keyPoints: [
+        { label: "Quick search shortcut", value: "Press '/' anywhere in Jira to open the search bar" },
+        { label: "Basic search", value: "Dropdown filters — no JQL needed; Jira builds the query for you" },
+        { label: "Learn JQL trick", value: "Build a filter in basic search, then switch to JQL to see what it generated" },
+        { label: "Save filters", value: "Saved filters appear in the sidebar — share them with teammates too" },
+      ],
+    },
+    {
+      id: "js-ch5",
+      number: "Chapter 5",
+      title: "Jira Query Language (JQL)",
+      summary: "Full guide to writing JQL queries — syntax, fields, operators, functions, and practical examples for common use cases.",
+      content: [
+        {
+          type: "subheading",
+          text: "What is JQL?",
+        },
+        {
+          type: "paragraph",
+          text: "JQL (Jira Query Language) is a structured query language for searching Jira issues. It is more powerful than basic search and allows you to create precise, complex filters that basic search cannot express.",
+        },
+        {
+          type: "subheading",
+          text: "How to Access the JQL Editor",
+        },
+        {
+          type: "ui-hint",
+          text: "Left sidebar → Filters → All work items → in the search bar area, click 'Switch to JQL' (top-right). The search bar transforms into a JQL text editor with autocomplete. Type your query and press Enter to run it.",
+        },
+        {
+          type: "subheading",
+          text: "JQL Syntax",
+        },
+        {
+          type: "paragraph",
+          text: "Every JQL query follows the same pattern:",
+        },
+        {
+          type: "code",
+          code: {
+            label: "Basic syntax",
+            lines: [
+              "field  operator  value",
+              "",
+              "-- Combine conditions --",
+              "field operator value  AND  field operator value",
+              "field operator value  OR   field operator value",
+              "",
+              "-- Sort results --",
+              "field operator value  ORDER BY field ASC|DESC",
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Common Fields",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Field", "Description", "Example value"],
+            rows: [
+              ["project", "The project the issue belongs to", "project = \"MY PROJECT\""],
+              ["issuetype", "Type of issue", "issuetype = Story"],
+              ["status", "Current workflow status", "status = \"In Progress\""],
+              ["assignee", "Person assigned to the issue", "assignee = john.smith"],
+              ["reporter", "Person who created the issue", "reporter = currentUser()"],
+              ["priority", "Issue priority level", "priority = High"],
+              ["labels", "Labels applied to the issue", "labels = \"tech-debt\""],
+              ["sprint", "Sprint the issue belongs to", "sprint = \"Sprint 3\""],
+              ["created", "Date the issue was created", "created >= -7d"],
+              ["updated", "Date the issue was last updated", "updated >= \"2024-01-01\""],
+              ["due", "Due date of the issue", "due <= endOfWeek()"],
+              ["component", "Component of the project", "component = Frontend"],
+              ["fixVersion", "Release version", "fixVersion = \"v2.0\""],
+              ["\"Story Points\"", "Story point estimate", "\"Story Points\" > 5"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Common Operators",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Operator", "Meaning", "Example"],
+            rows: [
+              ["=", "Exactly equals", "status = Done"],
+              ["!=", "Does not equal", "status != Done"],
+              ["IN", "Matches any value in a list", "status IN (\"To Do\", \"In Progress\")"],
+              ["NOT IN", "Does not match any in list", "issuetype NOT IN (Sub-task, Epic)"],
+              ["~", "Contains (text search)", "summary ~ \"login bug\""],
+              ["!~", "Does not contain", "summary !~ \"spike\""],
+              [">  >=", "Greater than / greater or equal", "created >= -30d"],
+              ["<  <=", "Less than / less or equal", "due <= endOfWeek()"],
+              ["IS EMPTY", "Field has no value", "assignee IS EMPTY"],
+              ["IS NOT EMPTY", "Field has a value", "labels IS NOT EMPTY"],
+              ["WAS", "Status was this value at any point", "status WAS \"In Progress\""],
+              ["CHANGED", "Field value has changed", "status CHANGED BY currentUser()"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Common Functions",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Function", "Returns", "Example"],
+            rows: [
+              ["currentUser()", "The logged-in user", "assignee = currentUser()"],
+              ["openSprints()", "All currently open sprints", "sprint in openSprints()"],
+              ["closedSprints()", "All closed/completed sprints", "sprint in closedSprints()"],
+              ["futureSprints()", "Sprints not yet started", "sprint in futureSprints()"],
+              ["startOfDay()", "Start of today", "created >= startOfDay()"],
+              ["endOfDay()", "End of today", "due <= endOfDay()"],
+              ["startOfWeek()", "Start of current week (Mon)", "updated >= startOfWeek()"],
+              ["endOfWeek()", "End of current week (Sun)", "due <= endOfWeek()"],
+              ["now()", "Current date and time", "updated >= now()"],
+              ["-Nd / -Nw", "N days/weeks ago (relative date)", "created >= -7d"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Sample JQL Queries",
+        },
+        {
+          type: "code",
+          code: {
+            label: "All open issues assigned to me",
+            lines: ["assignee = currentUser() AND status != Done"],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "All bugs in the current sprint",
+            lines: ["issuetype = Bug AND sprint in openSprints()"],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "Issues created in the last 7 days",
+            lines: ["created >= -7d ORDER BY created DESC"],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "High priority unassigned issues",
+            lines: ["priority in (High, Highest) AND assignee is EMPTY AND status != Done"],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "Everything in my project that is overdue",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND due <= now()",
+              "AND status != Done",
+              "ORDER BY due ASC",
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "All stories in the current sprint for a specific project",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND issuetype = Story",
+              "AND sprint in openSprints()",
+              "ORDER BY status ASC",
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "Issues updated this week that I reported",
+            lines: [
+              "reporter = currentUser()",
+              "AND updated >= startOfWeek()",
+              "ORDER BY updated DESC",
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "All unresolved blockers (issues blocking other issues)",
+            lines: [
+              "issue in linkedIssues(\"MYPROJECT-123\", \"is blocked by\")",
+              "AND status != Done",
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "JQL Tips",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Autocomplete: Jira suggests field names, operators, and values as you type — press Ctrl+Space to trigger it manually.",
+            "Quote values with spaces: status = \"In Progress\" not status = In Progress.",
+            "Use AND/OR to combine conditions. AND narrows results; OR broadens them.",
+            "Wrap OR conditions in brackets when mixing with AND: project = X AND (status = \"To Do\" OR status = \"In Progress\").",
+            "ORDER BY goes at the very end: ... ORDER BY created DESC.",
+            "Save frequent queries as filters and share them with the team via Filters → Share filter.",
+          ],
+        },
+        {
+          type: "ui-hint",
+          text: "JQL autocomplete shortcut: when typing a field name, press Ctrl+Space (or just start typing) and Jira will suggest matching fields. After the field, it suggests valid operators. After the operator, it suggests valid values for that field — no need to memorise everything.",
+        },
+      ],
+      keyPoints: [
+        { label: "JQL syntax", value: "field  operator  value — combine with AND / OR — sort with ORDER BY" },
+        { label: "Most useful function", value: "currentUser() — makes queries personal and reusable across accounts" },
+        { label: "Most useful operator", value: "IN — matches multiple values in one condition instead of many OR clauses" },
+        { label: "Learn trick", value: "Build in basic search → Switch to JQL to see the generated query" },
+        { label: "Autocomplete", value: "Jira suggests fields, operators, and values as you type — use it" },
+      ],
+    },
+  ],
+};
+
 /* ─────────────────── COMPONENTS ─────────────────── */
 
 function ChevronDown({ className }: { className?: string }) {
@@ -1798,6 +2288,26 @@ function ContentBlock({ block }: { block: ChapterContent }) {
         </div>
       );
 
+    case "code":
+      return (
+        <div className="mb-4">
+          {block.code?.label && (
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">{block.code.label}</p>
+          )}
+          <pre className="bg-gray-900 text-green-400 rounded-lg px-4 py-3 overflow-x-auto text-sm leading-relaxed font-mono">
+            {block.code?.lines.join("\n")}
+          </pre>
+        </div>
+      );
+
+    case "ui-hint":
+      return (
+        <div className="mb-4 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 flex gap-3">
+          <span className="text-amber-500 text-lg shrink-0">🖱️</span>
+          <p className="text-sm text-amber-800 leading-relaxed">{block.text}</p>
+        </div>
+      );
+
     default:
       return null;
   }
@@ -1874,6 +2384,7 @@ const TABS = [
   { id: "agile-fundamentals", label: "Agile Fundamentals", course: agileFundamentals },
   { id: "scrum-basics", label: "Scrum: The Basics", course: scrumBasics },
   { id: "jira-cloud", label: "Jira Cloud", course: jiraCloud },
+  { id: "jira-search", label: "Jira Search & JQL", course: jiraSearch },
 ];
 
 export default function Home() {
