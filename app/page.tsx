@@ -2961,6 +2961,740 @@ const advancedJira: Course = {
   ],
 };
 
+const mistakesToAvoid: Course = {
+  id: "mistakes-to-avoid",
+  title: "Mistakes to Avoid in Agile Project Management",
+  subtitle: "LinkedIn Learning — Mistakes to Avoid in Agile Project Management (4.7 ★, 1,529 reviews)",
+  chapters: [
+    {
+      id: "ma-ch1",
+      number: "Chapter 1",
+      title: "Launching Agile Project Management",
+      summary: "The most common mistakes teams make when first adopting agile — misreading what agile actually is, over-promising outcomes, moving too fast, and using inconsistent naming.",
+      content: [
+        {
+          type: "subheading",
+          text: "Misunderstanding Agile",
+        },
+        {
+          type: "paragraph",
+          text: "The most dangerous mistake is treating agile as a process or a set of ceremonies rather than a mindset. Teams that 'do' standups and sprints without embracing the underlying values (collaboration, feedback, continuous improvement) are doing agile theatre — the forms without the substance.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Common misunderstanding", "What agile actually means"],
+            rows: [
+              ["Agile = no planning", "Agile replaces big up-front planning with continuous, lightweight planning every sprint"],
+              ["Agile = no documentation", "Agile values working software OVER comprehensive docs — some docs are still valuable"],
+              ["Agile = no deadlines", "Agile uses sprint goals and release dates; it makes commitments visible, not invisible"],
+              ["Agile = faster delivery of everything", "Agile delivers working software sooner; it does not automatically double your team's output"],
+              ["Agile = standup meetings", "Standup is one 15-minute ceremony — agile is an entire culture of inspect-and-adapt"],
+              ["Agile = no manager", "Agile changes the manager's role from directing tasks to removing impediments and coaching"],
+            ],
+          },
+        },
+        {
+          type: "note",
+          text: "The Agile Manifesto values: Individuals and interactions over processes and tools. Working software over comprehensive documentation. Customer collaboration over contract negotiation. Responding to change over following a plan.",
+        },
+        {
+          type: "subheading",
+          text: "Don't Over-Promise Results",
+        },
+        {
+          type: "paragraph",
+          text: "One of the most damaging launch mistakes is making stakeholder commitments like 'we will deliver all of these features by Q3 using agile.' Agile enables faster feedback and course-correction — it does not guarantee a fixed scope by a fixed date.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "The agile iron triangle is: fix time and resources, let scope flex — not fix all three.",
+            "Over-promising creates the same death-march pressure as waterfall, just with sprint ceremony on top.",
+            "Instead of promising features, promise sprint reviews: 'every two weeks you'll see working software and can redirect us.'",
+            "Use velocity data (after 3–4 sprints) to give realistic forecasts based on evidence, not optimism.",
+            "If forced to give an estimate, use a range: 'based on our current velocity, we expect 8–12 features by end of Q3.'",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Set the Right Pace",
+        },
+        {
+          type: "paragraph",
+          text: "Trying to implement every agile ceremony, tool, and practice simultaneously overwhelms teams and makes adoption fragile. The mistake is 'big bang' agile transformation instead of incremental adoption.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Wrong approach", "Right approach"],
+            rows: [
+              ["Roll out Scrum, Kanban, SAFe, and OKRs in week one", "Start with one framework (e.g. Scrum) and one board in Jira"],
+              ["Enforce every ceremony from day one", "Start with sprint planning + daily standup; add retros in sprint 2"],
+              ["Hire an agile coach and expect instant transformation", "Embed the coach for 3–6 months of gradual change"],
+              ["Change everything about how the team works overnight", "Change one practice per sprint; review its effect in the retro"],
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Consistent Project Titles",
+        },
+        {
+          type: "paragraph",
+          text: "Inconsistent naming conventions for projects, sprints, and epics in Jira creates chaos in search, filtering, and reporting. If one team names sprints 'Sprint 1' and another uses 'Q2-W1', JQL queries that reference sprint names break.",
+        },
+        {
+          type: "code",
+          code: {
+            label: "Problem: inconsistent sprint naming breaks JQL",
+            lines: [
+              "-- Team A names their sprints:",
+              "  Sprint 1, Sprint 2, Sprint 3",
+              "",
+              "-- Team B names their sprints:",
+              "  Q2 Sprint 1, Q2-W3, June Sprint",
+              "",
+              "-- This JQL works for Team A but not Team B:",
+              "sprint = \"Sprint 1\" AND project = TEAMB",
+              "",
+              "-- Consistent convention across ALL teams:",
+              "  PROJ-2026-S01, PROJ-2026-S02, PROJ-2026-S03",
+              "",
+              "-- Now this works reliably:",
+              "sprint = \"PROJ-2026-S01\"",
+            ],
+          },
+        },
+        {
+          type: "bullets",
+          items: [
+            "Agree a naming convention before your first sprint and document it in Confluence or a Jira project description.",
+            "Apply the same convention to: project keys, sprint names, epic names, labels, fix versions, and component names.",
+            "Project key tip: keep it short (3–5 chars), meaningful, and unique. ECOM, AUTH, INF — not PROJ1, PROJ2.",
+            "Use the same date format everywhere (YYYY-MM or Q format) so ORDER BY works predictably.",
+          ],
+        },
+      ],
+      keyPoints: [
+        { label: "Agile is a mindset", value: "Ceremonies without values = agile theatre. The Manifesto principles come first." },
+        { label: "Don't fix scope+date", value: "Agile fixes time and resources; let scope flex. Over-promising reintroduces waterfall pressure." },
+        { label: "Pace yourself", value: "Adopt one practice at a time. Prove it works before adding the next one." },
+        { label: "Name things consistently", value: "Agree a naming convention for projects, sprints, and epics before day one — it makes JQL and reporting reliable." },
+      ],
+    },
+    {
+      id: "ma-ch2",
+      number: "Chapter 2",
+      title: "Mistakes When Gaining Buy-In",
+      summary: "How poor leadership behaviour, excessive process overhead, and lack of transparency destroy agile adoption before it takes root.",
+      content: [
+        {
+          type: "subheading",
+          text: "Not Setting the Tone",
+        },
+        {
+          type: "paragraph",
+          text: "Agile adoption fails when leaders say the right words but continue behaving in waterfall ways. Teams watch what their manager does, not what they say. If the manager demands a 6-month Gantt chart while calling the process 'agile', the team concludes that agile is just a label.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Leader says (agile)", "Leader does (waterfall)", "Effect on team"],
+            rows: [
+              ["'You own the work'", "Assigns specific tasks to specific people in meetings", "Team stops self-organising; waits for instructions"],
+              ["'Embrace change'", "Gets angry when the sprint changes mid-stream", "Team hides problems rather than raising them"],
+              ["'Fail fast, learn fast'", "Blames individuals when a sprint goal is missed", "Team avoids risk; story estimates balloon with padding"],
+              ["'We work transparently'", "Filters bad news before it reaches stakeholders", "Stakeholders distrust the board; request separate status meetings"],
+            ],
+          },
+        },
+        {
+          type: "bullets",
+          items: [
+            "Leaders must attend sprint reviews and retrospectives — not just kick-offs.",
+            "Managers should ask 'what impediments can I remove?' at standups, not 'what did you finish yesterday?'",
+            "Demonstrate the inspect-and-adapt cycle at the leadership level: acknowledge when strategy changes and why.",
+            "Celebrate learning from failures publicly, not just celebrating successes.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Too Much Regulation",
+        },
+        {
+          type: "paragraph",
+          text: "Piling on approval gates, mandatory templates, and sign-off chains recreates the bureaucracy agile was designed to escape. This is especially common when agile is adopted within a traditionally governed organisation.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Over-regulated symptom", "Agile alternative"],
+            rows: [
+              ["Every story needs a 2-page spec approved by a committee", "User story + acceptance criteria in a Jira description field; PO approves in refinement"],
+              ["Code must pass a Change Advisory Board before merging", "Automated CI/CD gates replace manual CAB for routine changes"],
+              ["Sprint cannot start until a project manager signs off the sprint plan", "Team self-approves sprint plan; PO confirms sprint goal"],
+              ["Retrospective action items need VP approval", "Team owns their own process improvements; escalate only structural blockers"],
+              ["All Jira fields must be filled in for every issue", "Require only the minimum viable fields: summary, type, acceptance criteria"],
+            ],
+          },
+        },
+        {
+          type: "note",
+          text: "Regulation protects the organisation but kills team autonomy. The right balance: regulate outcomes and standards (e.g. security, compliance), not methods and ceremonies.",
+        },
+        {
+          type: "subheading",
+          text: "Lack of Transparency",
+        },
+        {
+          type: "paragraph",
+          text: "Agile depends on everyone seeing the real state of the work. When teams hide problems, cherry-pick metrics, or keep the board out of date, stakeholders lose trust and agile's inspect-and-adapt engine breaks down.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Keep the Jira board up to date daily — a stale board is actively misleading, not just unhelpful.",
+            "Raise blockers at the standup the day they appear. Waiting a week means a day problem becomes a sprint problem.",
+            "Share the sprint burndown with stakeholders, including sprints that didn't go to plan.",
+            "In retrospectives, name real problems. 'Everything went fine' retros produce zero improvement.",
+            "If a sprint goal will be missed, tell stakeholders early — not on the last day of the sprint.",
+          ],
+        },
+        {
+          type: "ui-hint",
+          text: "Jira transparency tip: pin the board link and the dashboard link in your team Slack channel or meeting invite. When it's one click away, people actually look at it before asking for status updates.",
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL to catch stale (untouched) in-progress issues",
+            lines: [
+              "status = \"In Progress\"",
+              "AND updated <= -3d",
+              "AND project = \"MYPROJECT\"",
+              "ORDER BY updated ASC",
+            ],
+          },
+        },
+      ],
+      keyPoints: [
+        { label: "Leaders go first", value: "Agile culture is set by leadership behaviour, not by sending the team on a Scrum course." },
+        { label: "Regulate outcomes", value: "Constrain what gets delivered (quality, security); don't constrain how the team works." },
+        { label: "Transparency is non-negotiable", value: "A visible, up-to-date board is the foundation of agile trust. Hiding problems makes them worse." },
+        { label: "Stale board fix", value: "Use a JQL filter to catch issues that haven't been updated in 3+ days — review them in standup." },
+      ],
+    },
+    {
+      id: "ma-ch3",
+      number: "Chapter 3",
+      title: "Mistakes When Building Teams",
+      summary: "How task assignment, value mismatches, estimation confusion, and poor change management undermine self-organising agile teams.",
+      content: [
+        {
+          type: "subheading",
+          text: "Assigning Tasks",
+        },
+        {
+          type: "paragraph",
+          text: "In agile, team members pull work from the top of the backlog based on their capacity. When managers assign specific tasks to specific people, they bypass self-organisation — the core mechanism that makes agile teams resilient and high-performing.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Assignment (wrong)", "Pull system (right)", "Why it matters"],
+            rows: [
+              ["'John, you take AUTH-12; Sarah, take AUTH-13'", "Team reviews sprint backlog; each person picks the top unstarted item", "Pull creates ownership; assignment creates obligation"],
+              ["PM updates the 'assigned to' field for every issue", "Developer assigns themselves when they start the issue", "Developers know their own capacity; PM does not"],
+              ["Tasks pre-assigned before sprint planning ends", "Sprint planning ends with a committed backlog; assignment happens at standup", "Circumstances change overnight; fixed assignment ignores this"],
+            ],
+          },
+        },
+        {
+          type: "ui-hint",
+          text: "Jira tip: leave the Assignee field blank when adding issues to the sprint. At each standup, the person who is about to start an issue assigns it to themselves by clicking the Assignee field → their name. The board then shows who is actually working on what, not who was told to work on what.",
+        },
+        {
+          type: "subheading",
+          text: "Overlooking Values",
+        },
+        {
+          type: "paragraph",
+          text: "Hiring developers purely for technical skills and ignoring whether they share agile values — collaboration, transparency, continuous learning — creates teams that technically function but culturally resist agile. One person who hoards knowledge or refuses to pair-program can block the whole team.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Interview for agile values: ask how candidates handled a failed sprint, how they give feedback, or how they handled a disagreement about a technical approach.",
+            "The Agile Manifesto's first value is 'Individuals and interactions' — individuals with good values create better interactions.",
+            "Watch for value mismatches in retros: do team members blame each other instead of examining the process?",
+            "Agile values to screen for: openness to change, comfort with uncertainty, willingness to collaborate across roles, growth mindset.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Predicting, Not Estimating",
+        },
+        {
+          type: "paragraph",
+          text: "A prediction is a commitment: 'This will take 3 days.' An estimate is a probabilistic guess: 'Based on similar work, I think this is a 5-point story — could be less if the API is clean, more if we hit edge cases.' Agile requires estimates, not predictions. Confusing the two destroys psychological safety.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Prediction (avoid)", "Estimate (use)"],
+            rows: [
+              ["'AUTH-12 will be done by Thursday'", "'AUTH-12 is a 3-pointer — likely mid-sprint if nothing blocks'"],
+              ["'This feature takes 2 weeks'", "'This epic is about 20 story points — at our velocity (15 pts/sprint) that's ~1.5 sprints'"],
+              ["'I'll have the bug fixed in 2 hours'", "'Feels like a quick fix — I'm putting it in the sprint but flagging that root cause is unclear'"],
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: find issues with no story point estimate (unestimated backlog risk)",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND issuetype = Story",
+              "AND \"Story Points\" is EMPTY",
+              "AND status = \"To Do\"",
+              "ORDER BY created ASC",
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Managing Change Incorrectly",
+        },
+        {
+          type: "paragraph",
+          text: "There are two opposite mistakes: refusing all mid-sprint changes (too rigid) and accepting every interruption that arrives (too permissive). Both break the team. The right answer is a defined, lightweight change process.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Mistake", "Consequence", "Correct approach"],
+            rows: [
+              ["Refuse all mid-sprint changes", "Critical bugs and urgent business needs go unaddressed; stakeholders lose faith", "Define an 'expedite' lane for P1 bugs and true urgencies with a WIP limit of 1"],
+              ["Accept every mid-sprint request", "Sprint goal becomes meaningless; velocity becomes unpredictable; team burns out", "All non-urgent items go to the backlog for next sprint planning"],
+              ["No process for urgencies", "Every request is declared 'urgent' by whoever asks loudest", "Define urgency criteria: customer-facing outage, legal/compliance risk, revenue blocked"],
+            ],
+          },
+        },
+        {
+          type: "note",
+          text: "The Scrum Guide says: during a sprint, no changes are made that would endanger the sprint goal. This doesn't mean zero flexibility — it means protecting the goal while allowing scope swap with Product Owner approval.",
+        },
+      ],
+      keyPoints: [
+        { label: "Pull, don't push", value: "Team members self-assign from the top of the sprint backlog — managers don't assign individual tasks." },
+        { label: "Hire for values too", value: "Technical skills get someone in the role; agile values make the team actually work." },
+        { label: "Estimate ≠ predict", value: "Estimates carry uncertainty. Treat them as ranges, not promises — protect psychological safety." },
+        { label: "Change process", value: "Define what counts as 'urgent enough to interrupt a sprint' before the sprint starts, not during it." },
+      ],
+    },
+    {
+      id: "ma-ch4",
+      number: "Chapter 4",
+      title: "Mistakes When Setting Cadence",
+      summary: "How skipping planning, infrequent releases, avoiding stakeholders, and ignoring feedback loops break the agile rhythm that makes the whole system work.",
+      content: [
+        {
+          type: "subheading",
+          text: "Not Planning",
+        },
+        {
+          type: "paragraph",
+          text: "Sprint planning is not optional and it is not a formality to rush through. Without it, the team has no shared sprint goal, no agreed capacity, and no joint understanding of what 'done' looks like for each story. The result is a chaotic sprint where everyone works on different things.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Sprint planning creates a sprint goal: a one-sentence statement of what the sprint achieves for the customer.",
+            "Without a sprint goal, there is no way to make trade-off decisions mid-sprint when something goes wrong.",
+            "Planning also surfaces dependencies: if AUTH blocks PAYMENT, that needs to be known before the sprint starts.",
+            "Typical planning time: 1–2 hours for a 2-week sprint. If it takes 4 hours, the backlog isn't refined enough.",
+            "The output of planning is the sprint backlog — a set of stories the team believes it can complete.",
+          ],
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: sprint goal check — count stories in current sprint with no acceptance criteria",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND sprint in openSprints()",
+              "AND issuetype = Story",
+              "AND description is EMPTY",
+              "ORDER BY created ASC",
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Not Releasing Frequently",
+        },
+        {
+          type: "paragraph",
+          text: "Long release cycles (quarterly or semi-annually) defeat the primary purpose of agile: fast feedback. If users don't see working software until six months after you built it, every assumption you made in those six months may be wrong.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Release cadence", "Feedback loop", "Risk exposure"],
+            rows: [
+              ["Every sprint (2 weeks)", "Users see changes every 2 weeks; course corrections are cheap", "Minimal — errors caught in the next sprint"],
+              ["Monthly", "Feedback arrives 4+ weeks late; moderate rework cost", "Moderate — a month's work may need rethinking"],
+              ["Quarterly", "3 months of assumptions before any real-world validation", "High — expensive to reverse a quarter's development"],
+              ["Semi-annual / annual", "Teams are building based on 6-month-old requirements", "Very high — effectively waterfall with agile ceremonies"],
+            ],
+          },
+        },
+        {
+          type: "bullets",
+          items: [
+            "Aim to release (or at minimum demo working software) at the end of every sprint.",
+            "Use feature flags to deploy code without releasing features — decouple deployment from release.",
+            "If releasing every sprint is not possible, identify and remove the specific bottleneck (manual QA, change approvals, etc.).",
+            "Even an internal demo to stakeholders at the end of every sprint is far better than a quarterly release.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Avoiding Stakeholders",
+        },
+        {
+          type: "paragraph",
+          text: "Sprint reviews are designed to bring real stakeholders — customers, users, business owners — into the feedback loop. When teams skip this or invite only internal team members, they lose the most important input: whether the software actually solves the problem.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Sprint reviews should include stakeholders who can say 'yes, this is what we needed' or 'no, we need to pivot.'",
+            "Avoiding stakeholders usually means the team is anxious about criticism — that anxiety is data worth addressing.",
+            "Stakeholders who are excluded from reviews fill the vacuum with status meetings, emails, and ad-hoc requests.",
+            "The product owner should personally invite the right stakeholders to each sprint review.",
+            "Stakeholder avoidance is often a symptom of over-promising in Chapter 1 — teams avoid showing what they actually built.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Missing Feedback",
+        },
+        {
+          type: "paragraph",
+          text: "Running retrospectives without acting on the findings is worse than not running them at all. It tells the team that identifying problems doesn't matter because nothing will change. Retrospectives without follow-through destroy psychological safety.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Feedback failure", "Fix"],
+            rows: [
+              ["Retro action items never get assigned or tracked", "Create a Jira story for each retro action item with an owner and a due date"],
+              ["Same problems appear in every retro", "Check whether last sprint's action items were actually done before starting the new retro"],
+              ["Only the Scrum Master participates actively", "Structured formats (Start/Stop/Continue, 4Ls, Mad/Sad/Glad) draw in quieter team members"],
+              ["Stakeholder feedback from sprint review is ignored", "PO adds it to the backlog, estimates it, and prioritises it — not optional"],
+              ["Team says 'everything was fine' every sprint", "Introduce anonymous feedback tools (Mentimeter, EasyRetro) to surface honest opinions"],
+            ],
+          },
+        },
+        {
+          type: "ui-hint",
+          text: "Jira tip for retro action tracking: create a label 'retro-action' and apply it to all stories that come from retrospectives. Then use this JQL to check if last sprint's retro actions were completed: labels = \"retro-action\" AND sprint in closedSprints() AND status != Done",
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: track retro action items across sprints",
+            lines: [
+              "-- Open retro actions (should be empty by end of sprint)",
+              "labels = \"retro-action\"",
+              "AND status != Done",
+              "ORDER BY created ASC",
+              "",
+              "-- Closed retro actions from last sprint (retrospective evidence)",
+              "labels = \"retro-action\"",
+              "AND sprint in closedSprints()",
+              "AND status = Done",
+              "ORDER BY updated DESC",
+            ],
+          },
+        },
+      ],
+      keyPoints: [
+        { label: "Plan every sprint", value: "Sprint planning creates the shared goal that enables every decision the team makes for the next two weeks." },
+        { label: "Release per sprint", value: "Long release cycles defeat the purpose of agile. Aim for every sprint; use feature flags if needed." },
+        { label: "Invite real stakeholders", value: "Sprint reviews without stakeholders are just team demos — valuable, but missing the most important feedback." },
+        { label: "Close the loop", value: "Retro action items must become Jira stories with owners. Unacted feedback destroys trust in the process." },
+      ],
+    },
+    {
+      id: "ma-ch5",
+      number: "Chapter 5",
+      title: "Mistakes When Making Improvements",
+      summary: "How over-ambitious improvement initiatives, metric avoidance, complacency, and overlooked hand-offs prevent teams from actually getting better.",
+      content: [
+        {
+          type: "subheading",
+          text: "Starting Too Large",
+        },
+        {
+          type: "paragraph",
+          text: "Retrospective action items that are too large to complete in one sprint never get done. 'Improve our entire CI/CD pipeline' is not a retro action — it's a project. The same applies to agile transformation initiatives: starting with a company-wide simultaneous rollout almost always fails.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Too large (fails)", "Right size (works)"],
+            rows: [
+              ["'Implement automated testing across all services'", "'Add unit tests for the auth module this sprint — target 80% coverage'"],
+              ["'Transform all 12 teams to agile simultaneously'", "'Pilot agile with one team for two sprints; review and expand'"],
+              ["'Rewrite our entire deployment process'", "'Automate one manual deployment step this sprint'"],
+              ["'Fix all technical debt'", "'Allocate 20% of each sprint capacity to paying down the top 3 tech debt items'"],
+            ],
+          },
+        },
+        {
+          type: "bullets",
+          items: [
+            "Apply the same story-sizing discipline to improvement work as to product work: can it be done in one sprint?",
+            "If the improvement is large, break it into an epic with child stories, one per sprint.",
+            "Celebrate small improvement wins visibly — it builds momentum for the next improvement.",
+            "The agile principle of 'sustainable pace' applies to improvement work too — don't pile up technical debt repayment on top of a full sprint.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Avoiding Metrics",
+        },
+        {
+          type: "paragraph",
+          text: "Teams that don't measure their performance can't improve it. Common reasons for avoiding metrics: fear that they'll be used to blame individuals, belief that 'we know we're getting better', or uncertainty about which metrics matter.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Metric", "What it tells you", "Jira / dashboard access"],
+            rows: [
+              ["Velocity", "Story points completed per sprint — trend reveals if the team is growing or stuck", "Board → Reports → Velocity Chart"],
+              ["Sprint goal completion rate", "% of sprints where the sprint goal was met — measures predictability", "Manual: count completed goals vs total sprints"],
+              ["Cycle time", "Time from 'In Progress' to 'Done' — shorter and more consistent = better flow", "Board → Reports → Control Chart (Jira Premium) or export to CSV"],
+              ["Defect escape rate", "Bugs found in production vs in QA — low escape rate = quality discipline", "JQL: issuetype = Bug AND labels = \"production\""],
+              ["Impediment count", "Number of blockers raised per sprint — a proxy for systemic friction", "JQL: labels = \"impediment\" AND sprint in closedSprints()"],
+              ["Retro action completion", "% of retro actions completed each sprint — measures improvement follow-through", "JQL: labels = \"retro-action\" AND sprint in closedSprints() AND status = Done"],
+            ],
+          },
+        },
+        {
+          type: "note",
+          text: "Use metrics to improve the system, not to evaluate individuals. Velocity is a team metric. Posting individual story point counts on a dashboard destroys collaboration and incentivises story point inflation.",
+        },
+        {
+          type: "subheading",
+          text: "Sitting Still",
+        },
+        {
+          type: "paragraph",
+          text: "Once a team reaches a comfortable rhythm, the temptation is to stop experimenting. 'We're stable' becomes an excuse to avoid the discomfort of change. This is the antithesis of the agile principle: 'at regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behaviour accordingly.'",
+        },
+        {
+          type: "bullets",
+          items: [
+            "After 6 months of stable velocity, deliberately challenge the process: try mob programming for one sprint, change the retro format, experiment with a shorter sprint.",
+            "Introduce a 'what if we tried...' item on every retro agenda to keep the improvement mindset alive.",
+            "Stability is a plateau, not a destination. A team that delivered 30 points per sprint a year ago should be asking why they're still at 30.",
+            "Use the velocity trend chart to check for flatness — a flat velocity line over 6+ sprints is a signal to investigate.",
+          ],
+        },
+        {
+          type: "subheading",
+          text: "Overlooking Handoffs",
+        },
+        {
+          type: "paragraph",
+          text: "Handoffs — moments where work passes from one person, team, or system to another — are the biggest source of waste and delay in otherwise agile organisations. Dev → QA, QA → UAT, UAT → Ops: each handoff is a queue where work waits.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Handoff type", "Typical waste", "Agile fix"],
+            rows: [
+              ["Dev → QA", "QA queue causes issues to sit untested for days after dev is done", "Embed QA in the team; devs write automated tests; QA and dev pair on stories"],
+              ["Feature → Documentation", "Docs written weeks after code merges; already inaccurate", "Definition of Done includes documentation updated before closing the story"],
+              ["Sprint Done → Production", "Deployment queue caused by manual release process or change board", "Automate deployment pipeline; move to continuous delivery"],
+              ["Team A → Team B (dependency)", "Team B work blocked waiting for Team A's output", "Identify inter-team dependencies in sprint planning; use Jira issue links to track"],
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: find issues that have been 'Done' in dev but are stuck waiting for QA/deployment",
+            lines: [
+              "status = \"Done\"",
+              "AND labels != \"deployed\"",
+              "AND updated <= -5d",
+              "AND project = \"MYPROJECT\"",
+              "ORDER BY updated ASC",
+            ],
+          },
+        },
+      ],
+      keyPoints: [
+        { label: "Size improvements like stories", value: "If a retro action can't be done in one sprint, break it down. Small wins build momentum." },
+        { label: "Measure to improve", value: "Pick 3–4 team-level metrics (velocity, cycle time, defect rate, retro completion). Review them every retro." },
+        { label: "Comfort = stagnation", value: "A stable team that isn't improving is actually declining relative to its potential." },
+        { label: "Map your handoffs", value: "Draw the value stream from 'story started' to 'feature in production' — every wait is a handoff to eliminate." },
+      ],
+    },
+    {
+      id: "ma-ch6",
+      number: "Chapter 6",
+      title: "Mistakes When Managing Work",
+      summary: "How unclear priorities, starting too much at once, and mid-sprint scope additions undermine flow, predictability, and team trust.",
+      content: [
+        {
+          type: "subheading",
+          text: "Unclear Priorities",
+        },
+        {
+          type: "paragraph",
+          text: "When everything is marked as high priority, the team has no way to decide what to work on first. The result is paralysis, context-switching, and work that starts but never finishes. The product owner's single most important job is maintaining an ordered backlog where the top item is always the most valuable thing the team could work on.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Priority anti-pattern", "What happens", "Fix"],
+            rows: [
+              ["All 50 backlog items marked 'Highest' priority", "Team works on whatever is most recent or from the loudest stakeholder", "PO re-ranks backlog — only 1–3 items can be 'Highest' at any time"],
+              ["Multiple stakeholders all claim their items are #1", "Team gets conflicting direction mid-sprint", "PO is the single decision-maker on backlog order; stakeholders feed into the PO, not the team directly"],
+              ["Priority field never updated after initial estimate", "Old medium-priority items block new critical work", "Review and reorder backlog every sprint planning and every refinement session"],
+            ],
+          },
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: audit priority inflation (too many Highest items)",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND priority = Highest",
+              "AND status != Done",
+              "ORDER BY created ASC",
+              "",
+              "-- If this returns more than 3 items, priorities need rebalancing.",
+              "-- Healthy priority distribution should look like a pyramid:",
+              "--   Highest: 1–3 items",
+              "--   High:    5–10 items",
+              "--   Medium:  rest of the sprint/backlog",
+              "--   Low:     items deferred beyond next 2 sprints",
+            ],
+          },
+        },
+        {
+          type: "subheading",
+          text: "Finishing vs. Starting",
+        },
+        {
+          type: "paragraph",
+          text: "One of the most common agile mistakes is starting many items simultaneously and finishing few. High work-in-progress (WIP) creates context-switching overhead, extends cycle time, and makes sprint goals harder to meet. The Kanban principle 'stop starting, start finishing' captures the fix.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Each developer should have at most 1–2 items In Progress at any time. More than 2 = too much WIP.",
+            "If you're blocked on item A, pull it to a 'Blocked' column and pick up item B — but finish B before starting C.",
+            "Sprint reviews with 80% of stories half-done are worse than reviews with 50% of stories fully done.",
+            "WIP limits on the Jira board enforce the habit: set In Progress column WIP = number of team members.",
+            "The cost of context-switching: studies suggest each switch costs 15–20 minutes of refocus time. 5 switches per day = 90 minutes of lost productivity.",
+          ],
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: identify developers with too many concurrent in-progress items",
+            lines: [
+              "status = \"In Progress\"",
+              "AND project = \"MYPROJECT\"",
+              "AND sprint in openSprints()",
+              "ORDER BY assignee ASC",
+              "",
+              "-- Review results: if any assignee appears more than twice,",
+              "-- they have too much WIP. Have them finish one item before",
+              "-- starting another.",
+            ],
+          },
+        },
+        {
+          type: "ui-hint",
+          text: "Jira WIP limit: Board → top-right ⋯ → Board settings → Columns → click a column → set the Max column constraint. Jira will highlight the column in orange/red when the limit is exceeded, making the problem impossible to ignore.",
+        },
+        {
+          type: "subheading",
+          text: "Adding Work",
+        },
+        {
+          type: "paragraph",
+          text: "Mid-sprint scope additions — requests that arrive after sprint planning and get pulled into the current sprint without removing anything — are one of the most corrosive habits in agile teams. They make the sprint goal meaningless, velocity unpredictable, and the team feel perpetually overwhelmed.",
+        },
+        {
+          type: "table",
+          table: {
+            headers: ["Scenario", "Wrong response", "Right response"],
+            rows: [
+              ["Stakeholder asks for a new feature mid-sprint", "Add it to the sprint 'because it's small'", "Add it to the backlog. PO prioritises it. Team picks it up next sprint."],
+              ["Critical production bug reported mid-sprint", "Ignore the sprint; just fix it", "Use the expedite lane (WIP limit 1). Remove a story of equivalent size from the sprint with PO approval."],
+              ["Manager adds a 'quick report' to the sprint", "Team quietly absorbs it", "PO declines: 'Add it to the backlog. I'll prioritise it against current work and it comes in next sprint.'"],
+              ["Dev finishes early and is asked to start something new", "'Since you have time, start PROJ-99 too'", "Dev pulls the next item from the sprint backlog (already planned). If nothing left, contribute to a teammate's story."],
+            ],
+          },
+        },
+        {
+          type: "note",
+          text: "Protecting the sprint is the product owner's responsibility, not the Scrum Master's. The PO owns the backlog and is the first line of defence against mid-sprint additions. The Scrum Master coaches the PO on how to push back.",
+        },
+        {
+          type: "subheading",
+          text: "The Full Picture: Managing Work Well",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Single ordered backlog: one list, one owner (PO), clear priority. No parallel backlogs per team member.",
+            "WIP limits: In Progress column max = team size. Finish before starting.",
+            "Expedite lane: a separate column with WIP limit of 1 for genuine urgencies only.",
+            "Sprint lock: after planning ends, the sprint scope is locked. Changes require PO approval and a size-for-size swap.",
+            "Velocity as a forecasting tool: after 5+ sprints, use average velocity to tell stakeholders when items will realistically reach the sprint.",
+          ],
+        },
+        {
+          type: "code",
+          code: {
+            label: "JQL: find work added mid-sprint (created after sprint started)",
+            lines: [
+              "project = \"MYPROJECT\"",
+              "AND sprint in openSprints()",
+              "AND created >= startOfWeek()",
+              "AND issuetype != Sub-task",
+              "ORDER BY created DESC",
+              "",
+              "-- Review these in the retro.",
+              "-- If there are more than 1–2, the sprint is not being protected.",
+            ],
+          },
+        },
+      ],
+      keyPoints: [
+        { label: "One priority order", value: "The backlog is a single ordered list — the PO decides the order, not the loudest stakeholder." },
+        { label: "Stop starting, start finishing", value: "High WIP = low throughput. Set WIP limits on the Jira board and enforce them." },
+        { label: "Protect the sprint", value: "Mid-sprint additions go to the backlog. Only P1 emergencies enter via the expedite lane (WIP limit 1)." },
+        { label: "Track additions with JQL", value: "Use 'created >= startOfWeek() AND sprint in openSprints()' to surface unplanned mid-sprint work in the retro." },
+      ],
+    },
+  ],
+};
+
 /* ─────────────────── COMPONENTS ─────────────────── */
 
 function ChevronDown({ className }: { className?: string }) {
@@ -3168,6 +3902,7 @@ const TABS = [
   { id: "jira-cloud", label: "Jira Cloud", course: jiraCloud },
   { id: "jira-search", label: "Jira Search & JQL", course: jiraSearch },
   { id: "advanced-jira", label: "Advanced Jira Cloud", course: advancedJira },
+  { id: "mistakes-to-avoid", label: "Mistakes to Avoid", course: mistakesToAvoid },
 ];
 
 export default function Home() {
