@@ -3905,32 +3905,118 @@ const TABS = [
   { id: "mistakes-to-avoid", label: "Mistakes to Avoid", course: mistakesToAvoid },
 ];
 
+function HamburgerIcon() {
+  return (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("agile-fundamentals");
+  const [menuOpen, setMenuOpen] = useState(false);
   const current = TABS.find((t) => t.id === activeTab)!;
+
+  function switchTab(id: string) {
+    setActiveTab(id);
+    setMenuOpen(false);
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+
         {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-4xl font-bold text-gray-900 flex items-center gap-3">
-            <span>📋</span>
-            Agile Notes
-          </h1>
-          <p className="text-sm text-gray-500 mt-2">
-            Study notes from LinkedIn Learning — Agile Foundations and Scrum: The Basics
-          </p>
+        <div className="flex items-start justify-between mb-6 gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 flex items-center gap-3">
+              <span>📋</span>
+              Agile Notes
+            </h1>
+            <p className="text-sm text-gray-500 mt-1">
+              Study notes from LinkedIn Learning
+            </p>
+          </div>
+
+          {/* Hamburger button — visible on all sizes */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            className="shrink-0 mt-1 p-2 rounded-lg border border-gray-200 bg-white shadow-sm text-gray-600 hover:bg-gray-50 transition-colors"
+          >
+            {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
+          </button>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="border-b border-gray-200 mb-8">
-          <nav className="flex gap-0" aria-label="Tabs">
+        {/* Mobile / Hamburger dropdown menu */}
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 z-30 bg-black/30"
+              onClick={() => setMenuOpen(false)}
+            />
+            {/* Drawer */}
+            <div className="fixed top-0 right-0 z-40 h-full w-72 bg-white shadow-2xl flex flex-col">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+                <span className="font-bold text-gray-900 text-sm uppercase tracking-wide">Courses</span>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="p-1 text-gray-400 hover:text-gray-700"
+                  aria-label="Close menu"
+                >
+                  <CloseIcon />
+                </button>
+              </div>
+              <nav className="flex-1 overflow-y-auto py-2">
+                {TABS.map((tab, i) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => switchTab(tab.id)}
+                    className={`w-full text-left px-5 py-4 text-sm font-medium transition-colors flex items-center gap-3 ${
+                      activeTab === tab.id
+                        ? "bg-red-50 text-red-600 border-r-4 border-red-500"
+                        : "text-gray-700 hover:bg-gray-50"
+                    }`}
+                  >
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                      activeTab === tab.id ? "bg-red-500 text-white" : "bg-gray-100 text-gray-500"
+                    }`}>
+                      {i + 1}
+                    </span>
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </>
+        )}
+
+        {/* Current tab pill — shows active tab name on mobile */}
+        <div className="flex items-center gap-2 mb-6 sm:hidden">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">Viewing:</span>
+          <span className="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">
+            {current.label}
+          </span>
+        </div>
+
+        {/* Desktop tab bar — hidden on small screens */}
+        <div className="hidden sm:block border-b border-gray-200 mb-8">
+          <nav className="flex flex-wrap gap-0" aria-label="Tabs">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors ${
+                className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? "border-red-500 text-red-600"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
@@ -3947,6 +4033,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">{current.course.title}</h2>
           <CourseTab course={current.course} />
         </div>
+
       </div>
     </div>
   );
