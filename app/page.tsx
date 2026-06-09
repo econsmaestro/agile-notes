@@ -3947,11 +3947,11 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Hamburger button — visible on all sizes */}
+          {/* Hamburger button — mobile only */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
-            className="shrink-0 mt-1 p-2 rounded-lg border border-gray-200 bg-white shadow-sm text-gray-600 hover:bg-gray-50 transition-colors"
+            className="sm:hidden shrink-0 mt-1 p-2 rounded-lg border border-gray-200 bg-white shadow-sm text-gray-600 hover:bg-gray-50 transition-colors"
           >
             {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
           </button>
@@ -4009,17 +4009,17 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Desktop tab bar — hidden on small screens */}
+        {/* Desktop tab bar — hidden on mobile */}
         <div className="hidden sm:block border-b border-gray-200 mb-8">
           <nav className="flex flex-wrap gap-0" aria-label="Tabs">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                className={`px-4 py-3 text-sm font-semibold border-b-2 transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? "border-red-500 text-red-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-400"
                 }`}
               >
                 {tab.label}
